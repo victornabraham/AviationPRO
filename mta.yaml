@@ -1,0 +1,64 @@
+ID: AviationPRO
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: aviationpro-approuter
+    type: approuter.nodejs
+    path: aviationpro-approuter
+    parameters:
+      disk-quota: 512M
+      memory: 512M
+    requires:
+      - name: AviationPRO_html5_repo_runtime
+      - name: ABAPEcl
+      - name: uaa_AviationPRO
+  - name: AviationPRO_ui_deployer
+    type: com.sap.html5.application-content
+    path: AviationPRO_ui_deployer
+    requires:
+      - name: AviationPRO_html5_repo_host
+    build-parameters:
+      requires:
+        - name: AviationPRO
+          artifacts:
+            - './*'
+          target-path: resources/AviationPRO
+  - name: AviationPRO
+    type: html5
+    path: AviationPRO
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: AviationPRO_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: AviationPRO_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: ABAPEcl
+    parameters:
+      service-name: ABAPTRIAL
+      protocol:
+        - ODataV2
+      service: abap-trial
+      service-plan: shared
+    type: org.cloudfoundry.existing-service
+  - name: uaa_AviationPRO
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_AviationPRO
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service

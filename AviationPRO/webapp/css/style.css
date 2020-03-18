@@ -1,0 +1,24 @@
+.sapUiSizeCompact .sapMPageWithHeader>section {
+    top: 2rem;
+}
+
+.sapMSplitContainerMaster {
+    box-sizing: border-box;
+    width: 23rem;
+    float: left;
+    left: 0;
+    z-index: 1;
+    border-right: .15rem solid #0043ff;
+}
+
+html.sap-desktop ::-webkit-scrollbar-thumb {
+    background-color: #0008ff2e;
+}
+
+.sapMSplitContainerMaster .sapMPageHeader {
+    background-color: #cad8ff;
+    box-shadow: inset 0 -1px #d9d9d9;
+}
+
+Í
+

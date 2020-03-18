@@ -1,0 +1,203 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="AviationUI.AviationPRO.controller.CreateEntity">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="Booking Control" busy="{viewModel>/busy}" backgroundDesign="Transparent" showFooter="false">
+		<semantic:content>
+			<l:ResponsiveSplitter defaultPane="__pane0" id="splitter0">
+			    <l:rootPaneContainer>
+			        <l:PaneContainer id="container1">
+			            <l:panes>
+			                <l:SplitPane requiredParentWidth="50" id="pane0">
+			                    <l:content>
+			                        <Panel height="100%" backgroundDesign="Transparent" id="panel0">
+			                            <layoutData>
+			                                <l:SplitterLayoutData id="data17"/>
+			                            </layoutData>
+			                        <content>
+			                            <OverflowToolbar xmlns:sap.ui.layout="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns="sap.m" width="100%" id="toolbar1" design="Transparent">
+			                                
+			                                <content>
+			                                    <Button xmlns="sap.m" text="Save" id="button0" press="onSave" icon="sap-icon://save"/>
+			                                    <Button xmlns="sap.m" text="Cancel" id="button1" press="onCancel" icon="sap-icon://sys-cancel-2"/>
+			                                </content>
+			                            </OverflowToolbar>
+			                            <f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm" labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+				<f:content>
+					<Label xmlns="sap.m" text="Dyn. Action Control" required="false"/>
+					<CheckBox xmlns="sap.m" name="acceptTravel_ac" selected="{ path: 'acceptTravel_ac'}" id="acceptTravel_ac_id" enabled="false" visible="true"/>
+					<Label xmlns="sap.m" text="Dyn. Field Control" required="false"/>
+					<Input xmlns="sap.m" name="TravelID_fc" id="TravelID_fc_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'TravelID_fc', type: 'sap.ui.model.odata.type.Byte' }"/>
+					<Label xmlns="sap.m" text="Travel ID" required="true"/>
+					<Input xmlns="sap.m" name="TravelID" id="TravelID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true" value="{ path: 'TravelID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:8, nullable:false } }"/>
+					<Label xmlns="sap.m" text="Agency ID" required="false"/>
+					<Input xmlns="sap.m" name="AgencyID" id="AgencyID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'AgencyID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:6 } }"/>
+					<Label xmlns="sap.m" text="Agency Name" required="false"/>
+					<Input xmlns="sap.m" name="AgencyName" id="AgencyName_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'AgencyName', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:80 } }"/>
+					<Label xmlns="sap.m" text="Customer ID" required="false"/>
+					<Input xmlns="sap.m" name="CustomerID" id="CustomerID_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'CustomerID', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:6 } }"/>
+					<Label xmlns="sap.m" text="Last Name" required="false"/>
+					<Input xmlns="sap.m" name="CustomerName" id="CustomerName_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'CustomerName', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:40 } }"/>
+					<Label xmlns="sap.m" text="Starting Date" required="false"/>
+					<DatePicker xmlns="sap.m" name="BeginDate" value="{ path: 'BeginDate', type: 'sap.ui.model.type.DateTime'}" id="BeginDate_id" type="DateTime" enabled="true" visible="true"/>
+					<Label xmlns="sap.m" text="End Date" required="false"/>
+					<DatePicker xmlns="sap.m" name="EndDate" value="{ path: 'EndDate', type: 'sap.ui.model.type.DateTime'}" id="EndDate_id" type="DateTime" enabled="true" visible="true"/>
+					<Label xmlns="sap.m" text="Total Price" required="false"/>
+					<Input xmlns="sap.m" name="TotalPrice" id="TotalPrice_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal' , constraints:{ precision:17, scale:3 } }"/>
+					<Label xmlns="sap.m" text="Currency Code" required="false"/>
+					<Input xmlns="sap.m" name="CurrencyCode" id="CurrencyCode_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'CurrencyCode', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:5 } }"/>
+					<Label xmlns="sap.m" text="Booking Status" required="false"/>
+					<Input xmlns="sap.m" name="TravelStatus" id="TravelStatus_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'TravelStatus', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1 } }"/>
+					<Label xmlns="sap.m" text="Description" required="false"/>
+					<Input xmlns="sap.m" name="Description" id="Description_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="true" visible="true" value="{ path: 'Description', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:1024 } }"/>
+					<Label xmlns="sap.m" text="Time Stamp" required="false"/>
+					<Input xmlns="sap.m" name="LastChangedAt" id="LastChangedAt_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'LastChangedAt', type: 'sap.ui.model.odata.type.String' }"/>
+				</f:content>
+			</f:SimpleForm>
+			                        </content>
+			                        </Panel>
+			                    </l:content>
+			                </l:SplitPane>
+			                <l:SplitPane requiredParentWidth="50" id="pane1">
+			                <l:content>
+			                    <l:ResponsiveSplitter xmlns:l="sap.ui.layout" defaultPane="__pane0" id="splitter1">
+			                        <l:rootPaneContainer>
+			                            <l:PaneContainer orientation="Vertical" id="container1_1584459506411">
+			                                <l:panes>
+			                                    <l:SplitPane requiredParentWidth="50" id="pane0_1584459506410">
+			                                        <l:content>
+			                                            <Panel height="100%" backgroundDesign="Transparent" id="panel0_1584459506410">
+			                                                <layoutData>
+			                                                    <l:SplitterLayoutData id="data21"/>
+			                                                    
+			                                                </layoutData>
+			                                                
+			                                            <content>
+			                                                
+			                                                <Panel xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:smart="sap.ui.comp.smartfield" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" height="100%" backgroundDesign="Transparent" id="panel1_copy" content="{/TravelAgency}">
+			                                                
+			                                                    <layoutData>
+			                                                
+			                                                        <l:SplitterLayoutData xmlns:sap.ui.layout="sap.ui.layout" id="data21_copy"/>
+			                                                
+			                                                        
+			                                                
+			                                                    </layoutData>
+			                                                
+			                                                    <headerToolbar>
+			                                                
+			                                                        <OverflowToolbar xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.f.semantic" xmlns:sap.m.semantic="sap.m.semantic" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" width="300%" id="toolbar1_copy2" style="Clear">
+			                                                
+			                                                            <content>
+			                                                
+			                                                                <core:Icon xmlns:sap.ui.core="sap.ui.core" src="sap-icon://home-share" size="2em" id="icon0_copy2"/>
+			                                                
+			                                                                <Text xmlns="sap.m" text="Travel Agencies" id="text1"/>
+			                                                
+			                                                                <SearchField xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="60%" search="onSearch"/>
+			                                                
+			                                                                </content>
+			                                                
+			                                                            
+			                                                
+			                                                        </OverflowToolbar>
+			                                                
+			                                                        
+			                                                
+			                                                    </headerToolbar>
+			                                                
+			                                                    <content>
+			                                                
+			                                                        <TextArea xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.f.semantic" xmlns:sap.m.semantic="sap.m.semantic" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" value="Name:    {Name}  &#10;ID:          {AgencyID}&#10;Email:     {EMailAddress} &#10;Website: {WebAddress}&#10;Phone:   {PhoneNumber}  &#10;Address: {Street}&#10;                {City}, {PostalCode}&#10;                {CountryCode}" rows="10" id="area1_copy_panel1_0_panel1_0_copy2_panel1_copy_0" cols="70" editable="false"/>
+			                                                
+			                                                        
+			                                                
+			                                                    </content>
+			                                                
+			                                                    </Panel>
+			                                                
+			                                            </content>
+			                                                
+			                                            </Panel>
+			                                            
+			                                        </l:content>
+			                                        
+			                                    </l:SplitPane>
+			                                    <l:SplitPane requiredParentWidth="50" id="pane1_1584459506411">
+			                                        <l:content>
+			                                            <Panel height="100%" backgroundDesign="Transparent" id="panel1">
+			                                                <layoutData>
+			                                                    <l:SplitterLayoutData id="data23"/>
+			                                                    
+			                                                </layoutData>
+			                                                
+			                                            <content>
+			                                                
+			                                                <Panel xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" height="100%" backgroundDesign="Transparent" id="panel3" content="{/Passenger}">
+			                                                
+			                                                    <layoutData>
+			                                                
+			                                                        <sap.ui.layout:SplitterLayoutData xmlns:sap.ui.layout="sap.ui.layout" id="data32"/>
+			                                                
+			                                                        
+			                                                
+			                                                    </layoutData>
+			                                                
+			                                                    <headerToolbar>
+			                                                
+			                                                        <OverflowToolbar xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.f.semantic" xmlns:sap.m.semantic="sap.m.semantic" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" width="300%" id="toolbar1_copy4" style="Clear">
+			                                                
+			                                                            <content>
+			                                                
+			                                                                <core:Icon xmlns:sap.ui.core="sap.ui.core" src="sap-icon://customer-briefing" size="2em" id="icon0_copy4"/>
+			                                                
+			                                                                <Text xmlns="sap.m" text="Customers" id="text1_copy"/>
+			                                                
+			                                                                <SearchField xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns="sap.m" id="searchField_copy" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="80%" search="onSearch"/>
+			                                                
+			                                                                </content>
+			                                                
+			                                                            
+			                                                
+			                                                        </OverflowToolbar>
+			                                                
+			                                                        
+			                                                
+			                                                    </headerToolbar>
+			                                                
+			                                                    <content>
+			                                                
+			                                                        <TextArea xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.f.semantic" xmlns:sap.m.semantic="sap.m.semantic" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m" value="Name:   {LastName}, {FirstName} &#10;ID:         {CustomerID}&#10;Email:    {EMailAddress} &#10;Phone:  {PhoneNumber}  &#10;Address:{Street}&#10;               {City}, {PostalCode}&#10;               {CountryCode}" rows="10" id="area1_copy_panel1_0_panel1_0_copy3" cols="60" editable="false"/>
+			                                                
+			                                                    </content>
+			                                                
+			                                                    </Panel>
+			                                                
+			                                            </content>
+			                                                
+			                                            </Panel>
+			                                            
+			                                        </l:content>
+			                                        
+			                                    </l:SplitPane>
+			                                    </l:panes>
+			                                
+			                            </l:PaneContainer>
+			                            
+			                        </l:rootPaneContainer>
+			                        <l:layoutData>
+			                            <l:SplitterLayoutData id="xmlview0__data19"/>
+			                            
+			                        </l:layoutData>
+			                        </l:ResponsiveSplitter>
+			                </l:content>
+			                </l:SplitPane></l:panes>
+			        </l:PaneContainer>
+			    </l:rootPaneContainer>
+			</l:ResponsiveSplitter>
+		</semantic:content>
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" enabled="{viewModel>/enableCreate}" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>
+	</semantic:DetailPage>
+</mvc:View>

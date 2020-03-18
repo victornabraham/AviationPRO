@@ -1,0 +1,55 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:semantic="sap.m.semantic" controllerName="AviationUI.AviationPRO.controller.Master">
+<semantic:MasterPage xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:semantic="sap.m.semantic" id="page" title="{i18n>masterTitleCount}" navButtonPress="onNavBack" floatingFooter="true" showFooter="false" backgroundDesign="Solid">
+    <semantic:subHeader>
+        <Bar xmlns="sap.m" id="headerBar">
+            <contentMiddle>
+                <SearchField id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="100%" search="onSearch"/>
+                
+            </contentMiddle>
+            <contentLeft>
+                <Image src="https://ui5.sap.com/resources/sap/ui/documentation/sdk/images/logo_ui5.png" width="29px" height="29px" id="image0" mode="Background"/>
+            </contentLeft>
+            </Bar>
+        
+    </semantic:subHeader>
+    <semantic:content>
+        <OverflowToolbar xmlns="sap.m" width="100%" id="toolbar1" design="Transparent">
+            <content>
+                <Text xmlns="sap.m" text="Active Itineraries " id="text8"/>
+                <Button xmlns="sap.m" text="Refresh" id="refreshButton" press="onRefresh" icon="sap-icon://refresh"/>
+                <Button xmlns="sap.m" text="Add" id="button0" press="onAdd" icon="sap-icon://add-activity"/>
+                </content>
+            
+        </OverflowToolbar>
+        <!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+        <List xmlns="sap.m" id="list" items="{/TravelProcessor}" busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" selectionChange="onSelectionChange" backgroundDesign="Translucent" headerDesign="Plain" sticky="HeaderToolbar" growingThreshold="10" mode="SingleSelect">
+            <items>
+                <ObjectListItem press="onSelectionChange" title="Agency: {AgencyName}" id="item1_list_0_list_0" iconDensityAware="false" type="Active" number="{TotalPrice}" numberUnit="{CurrencyCode}" intro="Customer: {CustomerName}"/>
+                
+            </items>
+            </List>
+        </semantic:content>
+    <semantic:addAction>
+        <semantic:AddAction id="addButton" enabled="{appView>/addEnabled}" press="onAdd"/>
+        
+    </semantic:addAction>
+    <semantic:sort>
+        <semantic:SortSelect id="sort" selectedKey="{masterView>/sortBy}" change="onSort">
+            <core:Item xmlns:core="sap.ui.core" id="masterSort1" key="CustomerName" text="{i18n>masterSort1}"/>
+            <core:Item xmlns:core="sap.ui.core" id="masterSort2" key="TotalPrice" text="{i18n>masterSort2}"/>
+            </semantic:SortSelect>
+        
+    </semantic:sort>
+    <semantic:filter>
+        <semantic:FilterAction id="filter" press="onOpenViewSettings"/>
+        
+    </semantic:filter>
+    <semantic:group>
+        <semantic:GroupSelect id="group" selectedKey="{masterView>/groupBy}" change="onGroup">
+            <core:Item xmlns:core="sap.ui.core" id="masterGroupNone" key="None" text="{i18n>masterGroupNone}"/>
+            <core:Item xmlns:core="sap.ui.core" id="masterGroup1" key="TotalPrice" text="{i18n>masterGroup1}"/>
+            </semantic:GroupSelect>
+        
+    </semantic:group>
+    </semantic:MasterPage>
+</mvc:View>
